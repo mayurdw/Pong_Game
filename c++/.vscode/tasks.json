@@ -1,0 +1,41 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-Wall",
+                "Pong.cpp",
+                "-o",
+                "Pong.out",
+                "-g"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Test",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-Wall",
+                "test/*.cpp",
+                "-I",
+                "header/",
+                "-o",
+                "Pong_test.out",
+                "-g"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        }
+    ]
+}
