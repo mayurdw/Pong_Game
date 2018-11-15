@@ -43,10 +43,19 @@ class Ball
     inline void vSetYPos(int iYPos)
     {
         this->iYPos__ = iYPos;
+    }    
+    inline BALL_DIRECTION eGetDirection()
+    {
+        return eDirection;
+    }
+    inline void vSetDirection( BALL_DIRECTION eDir )
+    {
+        this->eDirection = eDir;
     }
 
     Ball(int iXPos, int iYPos);
     int iChangeDirection();
+    int iMove();
 };
 
 #endif
