@@ -27,14 +27,7 @@ class Ball
     BALL_DIRECTION eDirection;
 
   public:
-    Ball(int iXPos, int iYPos)
-    {
-        eDirection = STOP;
-        iXPos__ = iXPos;
-        iStartingXPos__ = iXPos;
-        iYPos__ = iYPos;
-        iStartingYPos__ = iYPos;
-    }
+    // Inline Getters and Setters
     inline int iGetXPos()
     {
         return iXPos__;
@@ -43,8 +36,16 @@ class Ball
     {
         return iYPos__;
     }
-    void vSetXPos(int iXPos);
-    void vSetYPos(int iYPos);
+    inline void vSetXPos(int iXPos)
+    {
+        this->iXPos__ = iXPos;
+    }
+    inline void vSetYPos(int iYPos)
+    {
+        this->iYPos__ = iYPos;
+    }
+
+    Ball(int iXPos, int iYPos);
     int iChangeDirection();
 };
 

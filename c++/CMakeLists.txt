@@ -1,0 +1,10 @@
+cmake_minimum_required (VERSION 2.6)
+project (Pong)
+include_directories(header)
+add_library(Ball src/ball.cpp)
+add_executable(Pong.out Pong.cpp)
+target_link_libraries(Pong.out Ball)
+
+project (Pong_test)
+add_executable(Pong_test.out test/Pong_test.cpp)
+target_link_libraries(Pong_test.out Ball)

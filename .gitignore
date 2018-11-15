@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+c++/Makefile
+c++/CMakeFiles/*
+c++/CMakeCache.txt
+c++/*.cmake
