@@ -6,6 +6,8 @@
 #ifndef BALL_H
 #define BALL_H
 
+namespace Balls
+{
 enum BALL_DIRECTION
 {
     STOP,
@@ -43,12 +45,12 @@ class Ball
     inline void vSetYPos(int iYPos)
     {
         this->iYPos__ = iYPos;
-    }    
+    }
     inline BALL_DIRECTION eGetDirection()
     {
         return eDirection;
     }
-    inline void vSetDirection( BALL_DIRECTION eDir )
+    inline void vSetDirection(BALL_DIRECTION eDir)
     {
         this->eDirection = eDir;
     }
@@ -57,5 +59,7 @@ class Ball
     int iChangeDirection();
     int iMove();
 };
+
+} // namespace Ball
 
 #endif

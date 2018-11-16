@@ -5,7 +5,7 @@
 
 #include "ball.h"
 
-Ball::Ball(int iXPos, int iYPos)
+Balls::Ball::Ball(int iXPos, int iYPos)
 {
     eDirection = STOP;
     iXPos__ = iXPos;
@@ -14,7 +14,7 @@ Ball::Ball(int iXPos, int iYPos)
     iStartingYPos__ = iYPos;
 }
 
-int Ball::iChangeDirection()
+int Balls::Ball::iChangeDirection()
 {
     int iRet = 0;
 
@@ -45,7 +45,7 @@ int Ball::iChangeDirection()
     return iRet;
 }
 
-int Ball::iMove()
+int Balls::Ball::iMove()
 {
     int iRet = 0;
 
