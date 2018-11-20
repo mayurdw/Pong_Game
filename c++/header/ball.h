@@ -54,9 +54,15 @@ class Ball
     {
         this->eDirection = eDir;
     }
+    inline void iReset()
+    {
+        this->iXPos__ = this->iStartingXPos__;
+        this->iYPos__ = this->iStartingYPos__;
+    }
 
     Ball(int iXPos, int iYPos);
-    int iChangeDirection();
+    int iChangeDirectionAtWall();
+    int iChangeDirectionAtPaddle();
     int iMove();
 };
 

@@ -20,7 +20,12 @@ class Player
   private:
     int iXPos__;
     int iYPos__;
+    int iOriginalXPos__;
+    int iOriginalYPos__;
     PLAYER_DIRECTION eDirection__;
+    int iUpChar__;
+    int iDownChar__;
+    int iScore__;
 
   public:
     // inline getters & setter
@@ -36,6 +41,18 @@ class Player
     {
         return eDirection__;
     }
+    inline int iGetUpChar()
+    {
+        return iUpChar__;
+    }
+    inline int iGetDownChar()
+    {
+        return iDownChar__;
+    }
+    inline int iGetScore()
+    {
+        return iScore__;
+    }
     inline void vSetXPos(int iXPos)
     {
         this->iXPos__ = iXPos;
@@ -48,9 +65,18 @@ class Player
     {
         this->eDirection__ = eDir;
     }
+    inline void vIncrementScore()
+    {
+        this->iScore__++;
+    }
+    inline void iReset()
+    {
+        this->iXPos__ = this->iOriginalXPos__;
+        this->iYPos__ = this->iOriginalYPos__;
+    }
 
     // functions
-    Player(int iXPos, int iYPos);
+    Player(int iXPos, int iYPos, int iUpChar, int iDownChar);
     int iMove();
 };
 } // namespace Players

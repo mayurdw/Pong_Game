@@ -7,10 +7,15 @@
 
 using namespace Players;
 
-Player::Player(int iXPos, int iYPos)
+Player::Player(int iXPos, int iYPos, int iUpChar, int iDownChar)
 {
+    this->iOriginalXPos__ = iXPos;
+    this->iOriginalYPos__ = iYPos;
     this->iXPos__ = iXPos;
     this->iYPos__ = iYPos;
+    this->iDownChar__ = iDownChar;
+    this->iUpChar__ = iUpChar;
+    this->iScore__=0;
 }
 
 int Player::iMove()
@@ -20,10 +25,10 @@ int Player::iMove()
     switch (this->eDirection__)
     {
     case PLAYER_UP:
-        this->iYPos__++;
+        this->iYPos__--;
         break;
     case PLAYER_DOWN:
-        this->iYPos__--;
+        this->iYPos__++;
         break;
     default:
         iRet = -1;
