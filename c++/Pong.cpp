@@ -113,7 +113,7 @@ static int Draw(Player cP1, Player &cP2, Ball &Pong)
 #ifdef WIN32
 #include <windows.h>
 #elif _POSIX_C_SOURCE >= 199309L
-#include <time.h>   // for nanosleep
+#include <time.h> // for nanosleep
 #else
 #include <unistd.h> // for usleep
 #endif
@@ -144,7 +144,7 @@ int main(int argc, char const *argv[])
     {
         cP1.vSetDir(PLAYER_STOP);
         cP2.vSetDir(PLAYER_STOP);
-        if ( bRestart )
+        if (bRestart)
         {
             bRestart = false;
             Pong.iReset();
@@ -166,12 +166,12 @@ int main(int argc, char const *argv[])
         {
             Pong.iChangeDirectionAtPaddle();
         }
-        else if ( ( Pong.iGetXPos() - 2 ) <= cP1.iGetXPos() )
+        else if ((Pong.iGetXPos() - 2) <= cP1.iGetXPos())
         {
             bRestart = true;
             cP2.vIncrementScore();
         }
-        else if ( ( Pong.iGetXPos() + 2 ) >= cP2.iGetXPos() )
+        else if ((Pong.iGetXPos() + 2) >= cP2.iGetXPos())
         {
             bRestart = true;
             cP1.vIncrementScore();
@@ -183,19 +183,19 @@ int main(int argc, char const *argv[])
         sleep_ms(500);
         if (kbhit(&iKeyPressed))
         {
-            if (iKeyPressed == cP1.iGetUpChar())
+            if (iKeyPressed == cP1.iGetUpChar() && cP1.iGetYPos() - 3 > 0 )
             {
                 cP1.vSetDir(PLAYER_UP);
             }
-            else if (iKeyPressed == cP1.iGetDownChar())
+            else if (iKeyPressed == cP1.iGetDownChar() && cP1.iGetYPos() + 3 < iHeight )
             {
                 cP1.vSetDir(PLAYER_DOWN);
             }
-            else if (iKeyPressed == cP2.iGetUpChar())
+            else if (iKeyPressed == cP2.iGetUpChar() && cP1.iGetYPos() - 3 > 0 )
             {
                 cP2.vSetDir(PLAYER_UP);
             }
-            else if (iKeyPressed == cP2.iGetDownChar())
+            else if (iKeyPressed == cP2.iGetDownChar() && cP1.iGetYPos() + 3 < iHeight )
             {
                 cP2.vSetDir(PLAYER_DOWN);
             }
@@ -204,7 +204,7 @@ int main(int argc, char const *argv[])
                 // do nothing
             }
         }
-        Pong.iMove();
+        //Pong.iMove();
         cP1.iMove();
         cP2.iMove();
     }
