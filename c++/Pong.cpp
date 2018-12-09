@@ -52,55 +52,51 @@ static int Draw(Player cP1, Player &cP2, Ball &Pong)
 {
     int iX = 0, iY = 0;
 
+    // clear the console
+    // TODO: Migrate to an abstraction file
     system("clear");
+
     while (iY <= iHeight)
     {
         iX = 0;
-        while (iX <= iWidth)
+        if (iY == 0 || iY == iHeight)
         {
-            if (iY == 0)
+            while (iX < iWidth)
             {
                 cout << '_';
+                iX++;
             }
-            else if (iY == iHeight)
-            {
-                cout << "_";
-            }
-            else if ((iY >= cP1.iGetYPos() - 2 && iY <= cP1.iGetYPos() + 2) &&
-                     (iX == cP1.iGetXPos()))
-            {
-                cout << "|";
-            }
-            else if ((iY >= cP2.iGetYPos() - 2 && iY <= cP2.iGetYPos() + 2) &&
-                     (iX == cP2.iGetXPos()))
+        }
+        else
+        {
+
+            if ((iY >= cP1.iGetYPos() - 2) && (iY <= cP1.iGetYPos() + 2))
             {
                 cout << "|";
+                iX++;
             }
-            else if (iY == Pong.iGetYPos() - 2 && iX == Pong.iGetXPos())
+
+            if ((iY >= Pong.iGetYPos() - 2) && (iY <= Pong.iGetYPos() + 2))
             {
-                cout << "*";
+                while (iX < Pong.iGetXPos() - 2)
+                {
+                    cout << " ";
+                    iX++;
+                }
+                cout << "***";
+                iX += 3;
             }
-            else if (iY == Pong.iGetYPos() - 1 && (iX >= Pong.iGetXPos() - 1 && iX <= Pong.iGetXPos() + 1))
+
+            if ((iY >= cP2.iGetYPos() - 2) && (iY <= cP2.iGetYPos() + 2))
             {
-                cout << "*";
+                while (iX < iWidth - 1)
+                {
+                    cout << " ";
+                    iX++;
+                }
+                cout << "|";
+                iX++;
             }
-            else if (iY == Pong.iGetYPos() && (iX >= Pong.iGetXPos() - 2 && iX <= Pong.iGetXPos() + 2))
-            {
-                cout << "*";
-            }
-            else if (iY == Pong.iGetYPos() + 1 && (iX >= Pong.iGetXPos() - 1 && iX <= Pong.iGetXPos() + 1))
-            {
-                cout << "*";
-            }
-            else if (iY == Pong.iGetYPos() + 2 && iX == Pong.iGetXPos())
-            {
-                cout << "*";
-            }
-            else
-            {
-                cout << " ";
-            }
-            iX++;
         }
         cout << "\n";
         iY++;
