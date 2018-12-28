@@ -12,6 +12,7 @@ Balls::Ball::Ball(int iXPos, int iYPos)
     iStartingXPos__ = iXPos;
     iYPos__ = iYPos;
     iStartingYPos__ = iYPos;
+    iRadii__ = iYPos/10;
 }
 
 int Balls::Ball::iChangeDirectionAtWall()
