@@ -3,12 +3,8 @@
     Created: Nov 2018
 */
 
-#include <iostream>
-#include <unistd.h>
-#include <termios.h>
-#include <unistd.h>
 #include <string>
-#include <fcntl.h>
+#include "abs_layer.h"
 #include "error.h"
 #include "ball.h"
 #include "player.h"
@@ -25,34 +21,6 @@ static inline int iObjectToWallBoundry()
     return (iHeight/10);
 }
 
-static bool kbhit(int *piKeyPressed)
-{
-    struct termios oldt, newt;
-    int ch;
-    int oldf;
-
-    *piKeyPressed = 0;
-
-    tcgetattr(STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO);
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
-    fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
-
-    ch = getchar();
-
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-    fcntl(STDIN_FILENO, F_SETFL, oldf);
-
-    if (ch != EOF)
-    {
-        *piKeyPressed = ch;
-        return true;
-    }
-
-    return false;
-}
 
 static int Draw(Player cP1, Player &cP2, Ball &Pong)
 {
@@ -110,28 +78,6 @@ static int Draw(Player cP1, Player &cP2, Ball &Pong)
 
     cout << "Player 1: " << cP1.iGetScore() << "\tPlayer 2: " << cP2.iGetScore() << "\n";
     return 0;
-}
-
-#ifdef WIN32
-#include <windows.h>
-#elif _POSIX_C_SOURCE >= 199309L
-#include <time.h> // for nanosleep
-#else
-#include <unistd.h> // for usleep
-#endif
-
-void sleep_ms(int milliseconds) // cross-platform sleep function
-{
-#ifdef WIN32
-    Sleep(milliseconds);
-#elif _POSIX_C_SOURCE >= 199309L
-    struct timespec ts;
-    ts.tv_sec = milliseconds / 1000;
-    ts.tv_nsec = (milliseconds % 1000) * 1000000;
-    nanosleep(&ts, NULL);
-#else
-    usleep(milliseconds * 1000);
-#endif
 }
 
 int main(int argc, char const *argv[])
