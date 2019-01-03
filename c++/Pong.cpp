@@ -14,7 +14,7 @@ using namespace Balls;
 using namespace std;
 
 static const int iWidth = 40;
-static const int iHeight = 40;
+static const int iHeight = 20;
 
 static inline int iObjectToWallBoundry()
 {
@@ -53,9 +53,6 @@ static int Draw(Player cP1, Player &cP2, Ball &Pong)
                 (iY <= Pong.iGetYPos() + iObjectToWallBoundry()))
             {
                 int iPos = 0;
-                cout << std::string((Pong.iGetXPos() - Pong.iGetRadii()), ' ');
-                iX += (Pong.iGetXPos() - Pong.iGetRadii()); 
-
                 if ( iY >= Pong.iGetYPos())
                 {
                     iPos = iY - Pong.iGetYPos();
@@ -64,11 +61,15 @@ static int Draw(Player cP1, Player &cP2, Ball &Pong)
                 {
                     iPos = Pong.iGetYPos() - iY;
                 }
+
+                cout << std::string((Pong.iGetXPos() - Pong.iGetRadii() + iPos), ' ');
+                iX += (Pong.iGetXPos() - Pong.iGetRadii());
+
                 if ( iPos > Pong.iGetWidth())
                 {
                     iPos = Pong.iGetWidth();
                 }
-                cout << std::string(Pong.iGetWidth() - iPos, '*');
+                cout << std::string(2*( Pong.iGetWidth() - iPos ), '*');
                 iX += (Pong.iGetWidth() - iPos);
             }
 
