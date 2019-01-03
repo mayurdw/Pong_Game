@@ -18,9 +18,8 @@ static const int iHeight = 40;
 
 static inline int iObjectToWallBoundry()
 {
-    return (iHeight/10);
+    return (iHeight / 10);
 }
-
 
 static int Draw(Player cP1, Player &cP2, Ball &Pong)
 {
@@ -50,24 +49,32 @@ static int Draw(Player cP1, Player &cP2, Ball &Pong)
                 iX++;
             }
 
-            if ((iY >= Pong.iGetYPos() - iObjectToWallBoundry()) && (iY <= Pong.iGetYPos() + iObjectToWallBoundry()))
+            if ((iY >= Pong.iGetYPos() - iObjectToWallBoundry()) &&
+                (iY <= Pong.iGetYPos() + iObjectToWallBoundry()))
             {
-                while (iX < Pong.iGetXPos() - Pong.iGetRadii())
+                int iPos = 0;
+                cout << std::string((Pong.iGetXPos() - Pong.iGetRadii()), ' ');
+                iX += (Pong.iGetXPos() - Pong.iGetRadii()); 
+
+                if ( iY >= Pong.iGetYPos())
                 {
-                    cout << " ";
-                    iX++;
+                    iPos = iY - Pong.iGetYPos();
                 }
-                cout << std::string(Pong.iGetWidth(), '*');
-                iX += Pong.iGetWidth();
+                else
+                {
+                    iPos = Pong.iGetYPos() - iY;
+                }
+                if ( iPos > Pong.iGetWidth())
+                {
+                    iPos = Pong.iGetWidth();
+                }
+                cout << std::string(Pong.iGetWidth() - iPos, '*');
+                iX += (Pong.iGetWidth() - iPos);
             }
 
             if ((iY >= cP2.iGetYPos() - iObjectToWallBoundry()) && (iY <= cP2.iGetYPos() + iObjectToWallBoundry()))
             {
-                while (iX < iWidth - 1)
-                {
-                    cout << " ";
-                    iX++;
-                }
+                cout << std::string( iWidth - iX, ' ');
                 cout << "|";
                 iX++;
             }
@@ -131,19 +138,19 @@ int main(int argc, char const *argv[])
         sleep_ms(500);
         if (kbhit(&iKeyPressed))
         {
-            if (iKeyPressed == cP1.iGetUpChar() && cP1.iGetYPos() - Pong.iGetWidth() > 0 )
+            if (iKeyPressed == cP1.iGetUpChar() && cP1.iGetYPos() - Pong.iGetWidth() > 0)
             {
                 cP1.vSetDir(PLAYER_UP);
             }
-            else if (iKeyPressed == cP1.iGetDownChar() && cP1.iGetYPos() + Pong.iGetWidth() < iHeight )
+            else if (iKeyPressed == cP1.iGetDownChar() && cP1.iGetYPos() + Pong.iGetWidth() < iHeight)
             {
                 cP1.vSetDir(PLAYER_DOWN);
             }
-            else if (iKeyPressed == cP2.iGetUpChar() && cP2.iGetYPos() - Pong.iGetWidth() > 0 )
+            else if (iKeyPressed == cP2.iGetUpChar() && cP2.iGetYPos() - Pong.iGetWidth() > 0)
             {
                 cP2.vSetDir(PLAYER_UP);
             }
-            else if (iKeyPressed == cP2.iGetDownChar() && cP2.iGetYPos() + Pong.iGetWidth() < iHeight )
+            else if (iKeyPressed == cP2.iGetDownChar() && cP2.iGetYPos() + Pong.iGetWidth() < iHeight)
             {
                 cP2.vSetDir(PLAYER_DOWN);
             }
