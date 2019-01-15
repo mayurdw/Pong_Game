@@ -4,4 +4,5 @@ Todo:
   ✔ Figure out a way to remove hard coded numbers @done(19-01-01 18:06)
   ✔ Migrate to an abstraction file @done(19-01-01 18:06)
   ☐ Draw the ball
-  ✔ Fix Right player's directional limits @done(19-01-01 18:07)
+  ✔ Fix Right player's directional limits @done(19-01-01 18:07) 
+  ☐ Fix the motion bug

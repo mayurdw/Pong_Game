@@ -13,8 +13,8 @@ using namespace Players;
 using namespace Balls;
 using namespace std;
 
-static const int iWidth = 40;
-static const int iHeight = 20;
+static const int iWidth = 80;
+static const int iHeight = 40;
 
 static inline int iObjectToWallBoundry()
 {
@@ -26,7 +26,6 @@ static int Draw(Player cP1, Player &cP2, Ball &Pong)
     int iX = 0, iY = 0;
 
     // clear the console
-    // TODO: Migrate to an abstraction file
     system("clear");
 
     while (iY <= iHeight)
@@ -43,7 +42,8 @@ static int Draw(Player cP1, Player &cP2, Ball &Pong)
         else
         {
 
-            if ((iY >= cP1.iGetYPos() - iObjectToWallBoundry()) && (iY <= cP1.iGetYPos() + iObjectToWallBoundry()))
+            if ((iY >= cP1.iGetYPos() - iObjectToWallBoundry()) &&
+                (iY <= cP1.iGetYPos() + iObjectToWallBoundry()))
             {
                 cout << "|";
                 iX++;
@@ -53,7 +53,7 @@ static int Draw(Player cP1, Player &cP2, Ball &Pong)
                 (iY <= Pong.iGetYPos() + iObjectToWallBoundry()))
             {
                 int iPos = 0;
-                if ( iY >= Pong.iGetYPos())
+                if (iY >= Pong.iGetYPos())
                 {
                     iPos = iY - Pong.iGetYPos();
                 }
@@ -62,20 +62,21 @@ static int Draw(Player cP1, Player &cP2, Ball &Pong)
                     iPos = Pong.iGetYPos() - iY;
                 }
 
-                cout << std::string((Pong.iGetXPos() - Pong.iGetRadii() + iPos), ' ');
-                iX += (Pong.iGetXPos() - Pong.iGetRadii());
-
-                if ( iPos > Pong.iGetWidth())
+                if (iPos > Pong.iGetWidth())
                 {
                     iPos = Pong.iGetWidth();
                 }
-                cout << std::string(2*( Pong.iGetWidth() - iPos ), '*');
-                iX += (Pong.iGetWidth() - iPos);
+                cout << std::string((Pong.iGetXPos() - Pong.iGetRadii() + iPos), ' ');
+                iX += (Pong.iGetXPos() - Pong.iGetRadii()) + iPos;
+
+                cout << std::string(2 * (Pong.iGetWidth() - iPos), '*');
+                iX += 2 * (Pong.iGetWidth() - iPos);
             }
 
-            if ((iY >= cP2.iGetYPos() - iObjectToWallBoundry()) && (iY <= cP2.iGetYPos() + iObjectToWallBoundry()))
+            if ((iY >= cP2.iGetYPos() - iObjectToWallBoundry()) &&
+                (iY <= cP2.iGetYPos() + iObjectToWallBoundry()))
             {
-                cout << std::string( iWidth - iX, ' ');
+                cout << std::string(iWidth - iX, ' ');
                 cout << "|";
                 iX++;
             }
