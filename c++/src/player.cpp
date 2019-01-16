@@ -12,10 +12,10 @@ Player::Player(int iXPos, int iYPos, int iUpChar, int iDownChar)
     this->iOriginalXPos__ = iXPos;
     this->iOriginalYPos__ = iYPos;
     this->iXPos__ = iXPos;
-    this->iYPos__ = iYPos;
+    this->iYPos__ = iYPos / 2;
     this->iDownChar__ = iDownChar;
     this->iUpChar__ = iUpChar;
-    this->iScore__=0;
+    this->iScore__= 0;
 }
 
 int Player::iMove()

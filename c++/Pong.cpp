@@ -13,12 +13,13 @@ using namespace Players;
 using namespace Balls;
 using namespace std;
 
-static const int iWidth = 80;
-static const int iHeight = 40;
+static const int iWidth = 20;
+static const int iHeight = 10;
 
-static inline int iObjectToWallBoundry()
+static inline bool bDrawObject(int iY, int iYPos)
 {
-    return (iHeight / 10);
+    return ((iY >= iYPos - ( iHeight / 10 )) &&
+            (iY <= iYPos + ( iHeight / 10 )));
 }
 
 static int Draw(Player cP1, Player &cP2, Ball &Pong)
@@ -33,54 +34,22 @@ static int Draw(Player cP1, Player &cP2, Ball &Pong)
         iX = 0;
         if (iY == 0 || iY == iHeight)
         {
-            while (iX < iWidth)
-            {
-                cout << '_';
-                iX++;
-            }
+            cout << std::string((iWidth - 1), '-');
         }
-        else
+
+        if (bDrawObject(iY, cP1.iGetYPos()))
         {
-
-            if ((iY >= cP1.iGetYPos() - iObjectToWallBoundry()) &&
-                (iY <= cP1.iGetYPos() + iObjectToWallBoundry()))
-            {
-                cout << "|";
-                iX++;
-            }
-
-            if ((iY >= Pong.iGetYPos() - iObjectToWallBoundry()) &&
-                (iY <= Pong.iGetYPos() + iObjectToWallBoundry()))
-            {
-                int iPos = 0;
-                if (iY >= Pong.iGetYPos())
-                {
-                    iPos = iY - Pong.iGetYPos();
-                }
-                else
-                {
-                    iPos = Pong.iGetYPos() - iY;
-                }
-
-                if (iPos > Pong.iGetWidth())
-                {
-                    iPos = Pong.iGetWidth();
-                }
-                cout << std::string((Pong.iGetXPos() - Pong.iGetRadii() + iPos), ' ');
-                iX += (Pong.iGetXPos() - Pong.iGetRadii()) + iPos;
-
-                cout << std::string(2 * (Pong.iGetWidth() - iPos), '*');
-                iX += 2 * (Pong.iGetWidth() - iPos);
-            }
-
-            if ((iY >= cP2.iGetYPos() - iObjectToWallBoundry()) &&
-                (iY <= cP2.iGetYPos() + iObjectToWallBoundry()))
-            {
-                cout << std::string(iWidth - iX, ' ');
-                cout << "|";
-                iX++;
-            }
+            cout << "|";
+            iX++;
         }
+
+        if( bDrawObject( iY, cP2.iGetYPos()))
+        {
+            cout << std::string(iWidth - iX - 1, ' ');
+            cout << "|";
+            iX++;
+        }
+
         cout << "\n";
         iY++;
     }
@@ -91,7 +60,7 @@ static int Draw(Player cP1, Player &cP2, Ball &Pong)
 
 int main(int argc, char const *argv[])
 {
-    Player cP1(0, iHeight / 2, 'w', 's'), cP2(iWidth, iHeight / 2, 'o', 'l');
+    Player cP1(0, iHeight, 'w', 's'), cP2(iWidth, iHeight, 'o', 'l');
     Ball Pong(iWidth / 2, iHeight / 2);
     Pong.vSetDirection(BOTTOM_RIGHT);
     int iKeyPressed = 0;
@@ -110,6 +79,7 @@ int main(int argc, char const *argv[])
         }
 
         Return_if_Error(Draw(cP1, cP2, Pong));
+#if 1
         if (Pong.iGetYPos() == Pong.iGetWidth() || Pong.iGetYPos() == (iHeight - Pong.iGetWidth()))
         {
             Pong.iChangeDirectionAtWall();
@@ -164,6 +134,7 @@ int main(int argc, char const *argv[])
         //Pong.iMove();
         cP1.iMove();
         cP2.iMove();
+#endif
     }
 
     return 0;
