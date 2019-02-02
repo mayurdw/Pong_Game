@@ -3,6 +3,6 @@ Todo:
   ✔ Optimize the drawing function @done(18-12-09 16:48)
   ✔ Figure out a way to remove hard coded numbers @done(19-01-01 18:06)
   ✔ Migrate to an abstraction file @done(19-01-01 18:06)
-  ☐ Draw the ball
+  ✔ Draw the ball @done(19-02-02 21:36)
   ✔ Fix Right player's directional limits @done(19-01-01 18:07) 
-  ☐ Fix the motion bug
+  ✔ Fix the motion bug @done(19-02-02 22:13)

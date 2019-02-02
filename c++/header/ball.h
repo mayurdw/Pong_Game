@@ -24,7 +24,6 @@ class Ball
   private:
     int iXPos__;
     int iYPos__;
-    int iRadii__;
     int iStartingXPos__;
     int iStartingYPos__;
     BALL_DIRECTION eDirection;
@@ -38,14 +37,6 @@ class Ball
     inline int iGetYPos()
     {
         return iYPos__;
-    }
-    inline int iGetRadii()
-    {
-        return iRadii__;
-    }
-    inline int iGetWidth()
-    {
-        return iGetRadii() + 1;
     }
     inline void vSetXPos(int iXPos)
     {
